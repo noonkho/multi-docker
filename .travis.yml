@@ -1,0 +1,26 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t echingkho/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true echingkho/react-test npm test
+
+before_deploy: "echo 'ready?'"
+
+after_success:
+  - docker build -t echingkho/multi-client ./client
+  - docker build -t echingkho/multi-nginx ./nginx
+  - docker build -t echingkho/multi-server ./server
+  - docker build -t echingkho/multi-worker ./worker
+  # first Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push echingkho/multi-client
+  - docker push echingkho/multi-nginx
+  - docker push echingkho/multi-server
+  - docker push echingkho/multi-worker
