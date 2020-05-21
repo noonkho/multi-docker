@@ -22,4 +22,4 @@ after_success:
   - docker push echingkho/multi-client
   - docker push echingkho/multi-nginx
   - docker push echingkho/multi-server
-  - docker push echignkho/multi-worker
+  - docker push echingkho/multi-worker
