@@ -1,8 +1,9 @@
-FROM node:alpine as builder
+FROM node:14.14.0-alpine as builder
 WORKDIR '/app'
 COPY ./package.json ./
 RUN npm install
 COPY . .
+# tell React to build static version of the web
 RUN npm run build
 
 FROM nginx

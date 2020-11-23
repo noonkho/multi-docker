@@ -4,7 +4,7 @@ const redis = require('redis');
 const redisClient = redis.createClient({
     host: keys.redisHost,
     port: keys.redisPort,
-    retry_strategy: () => 1000
+    retry_strategy: () => 1000 // if lost connection, try to reconnet every 1sec
 });
 const sub = redisClient.duplicate();
 
@@ -13,7 +13,7 @@ function fib(index) {
     return fib(index - 1) + fib(index - 2);
 }
 
-sub.on('message', (channel, message) => {
+sub.on('message', (channel, message) => { // When new value appear in redis
     redisClient.hset('values', message, fib(parseInt(message)));
 });
 sub.subscribe('insert');

@@ -16,7 +16,7 @@ services:
       context: ./nginx
     ports:
       - '3050:80'
-  api:
+  api: #server
     depends_on:
       - postgres
     build:
@@ -29,7 +29,7 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - PGUSER=postgres
-      - PGHOST=postgres
+      - PGHOST=postgres #name of postgres service
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432

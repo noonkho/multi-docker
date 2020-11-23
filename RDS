@@ -1,0 +1,4 @@
+RDS
+Master username: postgres
+Master password: postgresPassword
+Database name: fibvalues

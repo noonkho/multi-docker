@@ -15,11 +15,12 @@ class App extends Component {
             <h1 className="App-title">Fibonacci Sequence Calculator (up to 39th)</h1>
             <Link to="/">Home</Link>
             <Link to="/otherpage">Other Page</Link>
+          </header>
           <div>
             <Route exact path="/" component={Fib} />
             <Route path="/otherpage" component={OtherPage} />
           </div>
-          </header>
+          
         </div>
       </Router>
     );
